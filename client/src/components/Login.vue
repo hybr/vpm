@@ -1,28 +1,64 @@
 <template>
-  <div class="login-page">
-    <div class="form">
-      <p class="redirect-message" v-if="$route.query.redirect">
-        You need to login first
-      </p>
-      <form class="login-form" @submit.prevent="login">
-        <input
-          type="text"
-          placeholder="Enter your username"
-          v-model="credentials.username"
-        >
-        <p class="field-message" v-if="errors.username">{{ errors.username }}</p>
-        <input
-          type="password"
-          placeholder="Enter your password"
-          v-model="credentials.password"
-        >
-        <p class="field-message" v-if="errors.password">{{ errors.password }}</p>
-        <p v-if="error" class="error-message">{{ error }}</p>
-        <button type="submit">Login</button>
-        <p class="message">Not registered? <router-link to="signup">Create an account</router-link></p>
-      </form>
-    </div>
-  </div>
+    <form @submit.prevent="login">
+        <div data-inset="true">
+            <div class="ui-bar ui-bar-a">
+                <h3>{{ form.title }}</h3>
+            </div>
+            <div class="ui-body u-body-a">
+                <p>{{ form.summary }}</p>
+                <p v-if="$route.query.redirect">
+                    {{ form.redirec_message }}
+                </p>
+                <ul data-role="listview" data-inset="true">
+                    <li class="ui-field-contain">
+                        <label for="name2">User Name</label>
+                        <input 
+                            type="text" 
+                            name="name2" 
+                            id="name2" 
+                            value="" 
+                            data-clear-btn="true" 
+                            placeholder="Enter your username" 
+                            v-model="credentials.username"
+                        >
+                        <p v-if="errors.username">{{ errors.username }}</p>
+                    </li>
+                    <li class="ui-field-contain">
+                        <label for="password">Password</label>
+                        <input 
+                            type="password" 
+                            name="password" 
+                            id="name2" 
+                            value="" 
+                            data-clear-btn="true" 
+                            placeholder="Enter your password" 
+                            v-model="credentials.password">
+                        <p v-if="errors.password">{{ errors.password }}</p>
+                    </li>
+                    <li class="ui-field-contain">
+                        <fieldset  class="ui-grid-b ui-responsive">
+                            <div class="ui-block-a">
+                                <button type="reset" class="ui-btn ui-corner-all ui-btn-a">Reset</button>
+                            </div>
+                            <div class="ui-block-b">
+                                <button type="submit" class="ui-btn ui-corner-all ui-btn-a">Cancel</button>
+                            </div>
+                            <div class="ui-block-c">
+                                <button type="submit" class="ui-btn ui-corner-all ui-btn-a">Submit</button>
+                            </div>
+                            <p v-if="error">{{ error }}</p>
+                        </fieldset>
+                    </li>
+                    <li>
+                        <router-link to="forget_password">Forgot Password</router-link>
+                    </li>
+                    <li>
+                        <router-link to="signup">Need An Account</router-link>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
 </template>
 
 <script>
@@ -30,9 +66,14 @@ import auth from '../auth'
 
 export default {
 
-  data() {
-    return {
-      credentials: {
+    data() {
+        return {
+            form: {
+                title: 'Login',
+                summary: 'User Login Form',
+                redirec_message: 'You need to login first'
+            },
+            credentials: {
         username: '',
         password: ''
       },

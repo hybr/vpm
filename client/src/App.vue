@@ -26,6 +26,7 @@ export default {
 </script>
 <style>
 @import url(https://fonts.googleapis.com/css?family=Roboto:300);
+@import url(http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css);
 
 .login-page {
   max-width: 360px;
