@@ -10,31 +10,23 @@
                     {{ form.redirec_message }}
                 </p>
                 <ul data-role="listview" data-inset="true">
-                    <li class="ui-field-contain">
-                        <label for="name2">User Name</label>
-                        <input 
-                            type="text" 
-                            name="name2" 
-                            id="name2" 
-                            value="" 
-                            data-clear-btn="true" 
-                            placeholder="Enter your username" 
-                            v-model="credentials.username"
-                        >
-                        <p v-if="errors.username">{{ errors.username }}</p>
-                    </li>
-                    <li class="ui-field-contain">
-                        <label for="password">Password</label>
-                        <input 
-                            type="password" 
-                            name="password" 
-                            id="name2" 
-                            value="" 
-                            data-clear-btn="true" 
-                            placeholder="Enter your password" 
-                            v-model="credentials.password">
-                        <p v-if="errors.password">{{ errors.password }}</p>
-                    </li>
+					<li class="ui-field-contain" v-for="field in form.fields">
+						<label :for="field.name + 'id'">{{field.label}}</label>
+						<input v-if="field.html_tag === 'input'" 
+							:id="field.name + 'id'"
+							:type="field.type"
+							:name="field.name"
+							:value="field.default_value"
+							:data-clear-btn="field.data_clear_button"
+							:placeholder="field.placeholder"
+							:v-model="field.v_model"
+						>
+						<fieldset v-if="field.html_tag === 'fieldset'">
+						
+						</fieldset>
+						<p v-if="errors.username">{{ errors.username }}</p>
+					</li>
+
                     <li class="ui-field-contain">
                         <fieldset  class="ui-grid-b ui-responsive">
                             <div class="ui-block-a">
@@ -71,7 +63,41 @@ export default {
             form: {
                 title: 'Login',
                 summary: 'User Login Form',
-                redirec_message: 'You need to login first'
+                redirec_message: 'You need to login first',
+                fields: [
+                	{
+                		name: '_1',
+                		label: 'User Name',
+                		html_tag: 'input',
+                		type: 'text',
+                		default_value: '',
+                		data_clear_button: true,
+                		placeholder: 'Please enter your user name',
+                		v_model: 'credentials.username'                		
+                	},
+                	{
+                		name: '_2',
+                		label: 'User Password',
+                		html_tag: 'input',
+                		type: 'password',
+                		default_value: '',
+                		data_clear_button: true,
+                		placeholder: 'Please enter your user password',
+                		v_model: 'credentials.password'                		
+                	},
+                	{
+                		name: '_3',
+                		html_tag: 'fieldset',
+                		fields : [
+		                	{
+		                		name: '_1',
+		                		label: 'Reset',
+		                		html_tag: 'button',
+		                		type: 'reset'	               		
+		                	},
+                		]
+                	},
+                ]
             },
             credentials: {
         username: '',
