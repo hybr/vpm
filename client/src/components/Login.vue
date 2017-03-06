@@ -10,43 +10,10 @@
                     {{ form.redirec_message }}
                 </p>
                 <ul data-role="listview" data-inset="true">
-					<li class="ui-field-contain" v-for="field in form.fields">
-						<label :for="field.name + 'id'">{{field.label}}</label>
-						<input v-if="field.html_tag === 'input'" 
-							:id="field.name + 'id'"
-							:type="field.type"
-							:name="field.name"
-							:value="field.default_value"
-							:data-clear-btn="field.data_clear_button"
-							:placeholder="field.placeholder"
-							:v-model="field.v_model"
-						>
-						<fieldset v-if="field.html_tag === 'fieldset'">
-						
-						</fieldset>
+					<li v-for="field in form.fields">
+						<form-field v-bind:input-field="field">Loading Field...</form-field>
 						<p v-if="errors.username">{{ errors.username }}</p>
 					</li>
-
-                    <li class="ui-field-contain">
-                        <fieldset  class="ui-grid-b ui-responsive">
-                            <div class="ui-block-a">
-                                <button type="reset" class="ui-btn ui-corner-all ui-btn-a">Reset</button>
-                            </div>
-                            <div class="ui-block-b">
-                                <button type="submit" class="ui-btn ui-corner-all ui-btn-a">Cancel</button>
-                            </div>
-                            <div class="ui-block-c">
-                                <button type="submit" class="ui-btn ui-corner-all ui-btn-a">Submit</button>
-                            </div>
-                            <p v-if="error">{{ error }}</p>
-                        </fieldset>
-                    </li>
-                    <li>
-                        <router-link to="forget_password">Forgot Password</router-link>
-                    </li>
-                    <li>
-                        <router-link to="signup">Need An Account</router-link>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -55,9 +22,9 @@
 
 <script>
 import auth from '../auth'
+import FormField from './FormField.vue';
 
 export default {
-
     data() {
         return {
             form: {
@@ -95,7 +62,31 @@ export default {
 		                		html_tag: 'button',
 		                		type: 'reset'	               		
 		                	},
+		                	{
+		                		name: '_2',
+		                		label: 'Submit',
+		                		html_tag: 'button',
+		                		type: 'submit'	               		
+		                	},
+		                	{
+		                		name: '_3',
+		                		label: 'Cancel',
+		                		html_tag: 'button',
+		                		type: 'cancel'	               		
+		                	}
                 		]
+                	},
+                	{
+                		name: '_4',
+                		label: 'Forget Password',
+                		html_tag: 'router-link',
+                		link_to: 'forget_password'                		
+                	},
+                	{
+                		name: '_5',
+                		label: 'Need An Account',
+                		html_tag: 'router-link',
+                		link_to: 'signup'                		
                 	},
                 ]
             },
@@ -107,7 +98,6 @@ export default {
       errors: Object.assign({}, this.credentials)
     }
   },
-
   methods: {
     login() {
 
@@ -152,9 +142,13 @@ export default {
         return
       }
     }
-  }
+  },
+  	components: {
+		'form-field' : FormField
+	}
 }
 </script>
+
 <style scoped>
 .redirect-message {
   margin-top: 0px;
