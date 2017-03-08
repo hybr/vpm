@@ -1,36 +1,19 @@
 <template>
-    <form @submit.prevent="login">
-        <div data-inset="true">
-            <div class="ui-bar ui-bar-a">
-                <h3>{{ form.title }}</h3>
-            </div>
-            <div class="ui-body u-body-a">
-                <p>{{ form.summary }}</p>
-                <p v-if="$route.query.redirect">
-                    {{ form.redirec_message }}
-                </p>
-                <ul data-role="listview" data-inset="true">
-					<li v-for="field in form.fields">
-						<form-field v-bind:input-field="field">Loading Field...</form-field>
-						<p v-if="errors.username">{{ errors.username }}</p>
-					</li>
-                </ul>
-            </div>
-        </div>
-    </form>
+    <single-form v-bind:single-form-info="formInfo" >Loading Form...</single-form>
 </template>
 
 <script>
 import auth from '../auth'
-import FormField from './FormField.vue';
+import SingleForm from './SingleForm.vue';
 
 export default {
     data() {
         return {
-            form: {
+            formInfo: {
                 title: 'Login',
                 summary: 'User Login Form',
                 redirec_message: 'You need to login first',
+                actionMethod: "login",
                 fields: [
                 	{
                 		name: '_1',
@@ -40,7 +23,11 @@ export default {
                 		default_value: '',
                 		data_clear_button: true,
                 		placeholder: 'Please enter your user name',
-                		v_model: 'credentials.username'                		
+                		v_model: 'credentials.username',
+                		validations:   {
+                			required: true
+                		},
+                		post: true
                 	},
                 	{
                 		name: '_2',
@@ -50,11 +37,16 @@ export default {
                 		default_value: '',
                 		data_clear_button: true,
                 		placeholder: 'Please enter your user password',
-                		v_model: 'credentials.password'                		
+                		v_model: 'credentials.password',
+                		validations:   {
+                			required: true
+                		},
+                		post: true
                 	},
                 	{
                 		name: '_3',
-                		html_tag: 'fieldset',
+                		html_tag: 'button_set',
+                		legend: '',
                 		fields : [
 		                	{
 		                		name: '_1',
@@ -72,7 +64,7 @@ export default {
 		                		name: '_3',
 		                		label: 'Cancel',
 		                		html_tag: 'button',
-		                		type: 'cancel'	               		
+		                		type: 'button'	               		
 		                	}
                 		]
                 	},
@@ -91,12 +83,13 @@ export default {
                 ]
             },
             credentials: {
-        username: '',
-        password: ''
-      },
-      error: '',
-      errors: Object.assign({}, this.credentials)
-    }
+				username: '',
+				password: '',
+				name: ''
+			},
+			error: '',
+			errors: Object.assign({}, this.credentials)
+		}
   },
   methods: {
     login() {
@@ -144,7 +137,7 @@ export default {
     }
   },
   	components: {
-		'form-field' : FormField
+		'single-form' : SingleForm
 	}
 }
 </script>
