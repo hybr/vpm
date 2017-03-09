@@ -12,6 +12,20 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 
 module.exports = merge(baseWebpackConfig, {
   module: {
+   rules: [
+      // only lint local *.vue files
+      {
+        enforce: 'pre',
+        test: /.vue$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/
+      },
+      // but use vue-loader for all *.vue files
+      {
+        test: /.vue$/,
+        loader: 'vue-loader'
+      }
+    ],
     loaders: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap })
   },
   // eval-source-map is faster for development
