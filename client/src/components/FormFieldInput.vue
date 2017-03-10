@@ -2,11 +2,12 @@
 <template>
 	<span
 		v-if="inputField.html_tag === 'input'"
-		class="ui-field-contain"
+		class="input-field"
 	>
+	   <i class="material-icons prefix">account_circle</i>
 		<label 
 			:for="inputField.name + 'id'"
-		>{{inputField.label}}</label>
+		>{{inputField.label}}</label><br />
 		<input 
 			:id="inputField.name + 'id'"
 			:type="inputField.type"
