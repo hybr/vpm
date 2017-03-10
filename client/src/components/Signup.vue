@@ -18,13 +18,14 @@ export default {
                 fields: [
                 	{
                 		name: '_1',
-                		label: 'User Name',
+                		label: 'Login Identity',
                 		html_tag: 'input',
                 		type: 'text',
                 		default_value: '',
                 		data_clear_button: true,
-                		placeholder: 'Please enter your user name',
+                		placeholder: 'Please enter email address as login identity',
                 		v_model: 'credentials.username',
+                		icon_name: 'account_circle',
                 		validations:   {
                 			required: true
                 		},
@@ -39,6 +40,7 @@ export default {
                 		data_clear_button: true,
                 		placeholder: 'Please enter your user password',
                 		v_model: 'credentials.password',
+                		icon_name: 'vpn_key',
                 		validations:   {
                 			required: true
                 		},
@@ -53,6 +55,7 @@ export default {
                 		data_clear_button: true,
                 		placeholder: 'Please enter your user password',
                 		v_model: 'credentials.confirm_password',
+                		icon_name: 'vpn_key',
                 		validations:   {
                 			required: true
                 		},
@@ -67,6 +70,7 @@ export default {
                 		data_clear_button: true,
                 		placeholder: 'Please enter your full name',
                 		v_model: 'credentials.name',
+                		icon_name: 'account_box',
                 		validations:   {
                 			required: false
                 		},
@@ -103,7 +107,8 @@ export default {
                 		label: 'Already Registered',
                 		html_tag: 'router-link',
                 		link_to: 'login',
-                		post: false
+                		post: false,
+                		icon_name: 'link',
                 	}
                 ]
             },

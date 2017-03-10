@@ -1,0 +1,70 @@
+{
+  "_1" : {
+    "name" : "_1",
+    "label" : "Login Identity",
+    "html_tag" : "input",
+    "type" : "text",
+    "default_value" : "",
+    "data_clear_button" : true,
+    "placeholder" : "Please enter email address as login identity",
+    "icon_name" : "account_circle",
+    "validations" :   {
+      "required" : true
+    },
+    "post" : true
+  },
+"_2" : {
+    "name" : "_2",
+    "label" : "User Password",
+    "html_tag" : "input",
+    "type" : "password",
+    "default_value" : "",
+    "data_clear_button" : true,
+    "placeholder" : "Please enter your user password",
+    "v_model": "credentials.password",
+    "icon_name" : "vpn_key",
+    "validations" :   {
+      "required" : true
+    },
+    "post" : true
+  },
+  "_3" : {
+    "name" : "_3",
+    "html_tag" : "button_set",
+    "legend" : "",
+    "fields"  : [
+      {
+        "name" : "_1",
+        "label" : "Reset",
+        "html_tag" : "button",
+        "type" : "reset"
+      },
+      {
+        "name" : "_2",
+        "label" : "Submit",
+        "html_tag" : "button",
+        "type" : "submit"
+      },
+      {
+        "name" : "_3",
+        "label" : "Cancel",
+        "html_tag" : "button",
+        "type" : "button"
+      }
+    ]
+  },
+  "_4" : {
+    "name" : "_4",
+    "label" : "Forget Password",
+    "html_tag" : "router-link",
+    "link_to" : "forget_password",
+    "icon_name" : "link"
+  },
+  "_5" : {
+    "name" : "_5",
+    "label" : "Need An Account",
+    "html_tag" : "router-link",
+    "link_to" : "signup",
+    "icon_name" : "link"
+  }
+}

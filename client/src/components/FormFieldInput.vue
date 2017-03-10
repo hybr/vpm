@@ -4,7 +4,7 @@
 		v-if="inputField.html_tag === 'input'"
 		class="input-field"
 	>
-	   <i class="material-icons prefix">account_circle</i>
+	   <i class="material-icons prefix">{{inputField.icon_name}}</i>
 		<label 
 			:for="inputField.name + 'id'"
 		>{{inputField.label}}</label><br />
